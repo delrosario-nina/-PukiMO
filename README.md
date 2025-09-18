@@ -2,7 +2,8 @@
 
 [Your Programming Language Name]
 Creator
-[Your name]
+Del Rosario, Nina Claudia E.
+Hernia, Christian Joseph G.
 
 Language Overview
 [Provide a brief description of your programming language - what it's designed for, its main characteristics]
