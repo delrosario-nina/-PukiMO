@@ -17,72 +17,72 @@ Main Characteristics:
 
 
 **Keywords**
-   if: Introduces a conditional block. Executes code if a condition is true.
-   else: Defines the alternative branch of an if statement.
-   explore: Special loop construct for iterating over Safari Zone turns or balls.
-   run: Exits the current loop or exploration early.
-   define: Declares a user-defined function.
-   print: Outputs text or data to the console.
-   throwBall: Attempts to catch a Pokémon inside an encounter.
-   true: Boolean literal representing truth.
-   false: Boolean literal representing falsehood.
-   SafariZone: Built-in type for managing Safari Zone state (balls, turns, Pokémon).
-   Team: Built-in type for managing the player’s caught Pokémon.
-   Pokemon: Built-in type representing individual Pokémon entities.
+   - if: Introduces a conditional block. Executes code if a condition is true.
+   - else: Defines the alternative branch of an if statement.
+   - explore: Special loop construct for iterating over Safari Zone turns or balls.
+   - run: Exits the current loop or exploration early.
+   - define: Declares a user-defined function.
+   - print: Outputs text or data to the console.
+   - throwBall: Attempts to catch a Pokémon inside an encounter.
+   - true: Boolean literal representing truth.
+   - false: Boolean literal representing falsehood.
+   - SafariZone: Built-in type for managing Safari Zone state (balls, turns, Pokémon).
+   - Team: Built-in type for managing the player’s caught Pokémon.
+   - Pokemon: Built-in type representing individual Pokémon entities.
 
-Built-in Properties & Methods
+1. Built-in Properties & Methods
 These are predefined attributes and functions available on core objects (SafariZone, Team, Pokemon). They are not reserved words, but form part of the standard library.
 
-SafariZone
-Properties:
-   balls → number of Safari Balls available.
-   turns → number of turns left.
-   pokemon → collection of Pokémon in the zone.
+2. SafariZone
+   Properties:
+      balls → number of Safari Balls available.
+      turns → number of turns left.
+      pokemon → collection of Pokémon in the zone.
+   
+   Methods:
+      refillBalls(amount) → adds more Safari Balls.
+      refillTurns(amount) → adds more turns.
 
-Methods:
-   refillBalls(amount) → adds more Safari Balls.
-   refillTurns(amount) → adds more turns.
+3. Team
+   Properties:
+      pokemon → collection of Pokémon in the team.
 
-Team
-Properties:
-   pokemon → collection of Pokémon in the team.
+   Methods:
+      add(pokemon) → adds a Pokémon to the team.
+      all() → lists all Pokémon in the team.
+      find(name) → finds a Pokémon by name.
+      info(name, only=property) → retrieves detailed info about a Pokémon.
+      has(name) → checks if a Pokémon is in the team.
+      length() → returns number of Pokémon in the team.
+      random() → returns a random Pokémon from the team.
 
-Methods:
-   add(pokemon) → adds a Pokémon to the team.
-   all() → lists all Pokémon in the team.
-   find(name) → finds a Pokémon by name.
-   info(name, only=property) → retrieves detailed info about a Pokémon.
-   has(name) → checks if a Pokémon is in the team.
-   length() → returns number of Pokémon in the team.
-   random() → returns a random Pokémon from the team.
+4. Pokemon
+   Properties:
+      level → numeric level of the Pokémon.
+      shiny → boolean shiny status.
+      nature → string nature value.
+      behavior → string describing Pokémon behavior.
+      friendliness → numeric friendliness value.
+      caught → boolean whether caught.
 
-Pokemon
-Properties:
-level → numeric level of the Pokémon.
-shiny → boolean shiny status.
-nature → string nature value.
-behavior → string describing Pokémon behavior.
-friendliness → numeric friendliness value.
-caught → boolean whether caught.
-
-Collection Methods (for both Zone and Team Pokémon)
-add(name) → adds a Pokémon.
-remove(name) → removes a Pokémon.
-all() → returns all Pokémon in the collection.
-find(name) → finds a specific Pokémon.
-random() → returns a random Pokémon.
-filter(criteria) → filters Pokémon based on attributes (e.g., shiny=true, nature="Timid").
+5. Collection Methods (for both Zone and Team Pokémon)
+   add(name) → adds a Pokémon.
+   remove(name) → removes a Pokémon.
+   all() → returns all Pokémon in the collection.
+   find(name) → finds a specific Pokémon.
+   random() → returns a random Pokémon.
+   filter(criteria) → filters Pokémon based on attributes (e.g., shiny=true, nature="Timid").
 
 
 **Operators**
-Arithmetic Operators
+1. Arithmetic Operators
    + → addition or string concatenation.
    - → subtraction.
    * → multiplication.
    / → division.
    % → modulo (remainder).
 
-Comparison Operators
+2. Comparison Operators
    < → less than.
    > → greater than.
    == → equal to.
@@ -90,35 +90,35 @@ Comparison Operators
    >= → greater than or equal to.
    <= → less than or equal to.
 
-Logical Operators 
+3. Logical Operators 
    AND → logical conjunction.
    OR → logical disjunction.
    NOT → logical negation.
 
-Assignment Operators
+4. Assignment Operators
    = → assigns a value to a variable or property.
 
-Access / Chaining Operators
+5. Access / Chaining Operators
    -> → calling methods
    . → access a property of an object
 
 
 **Literals**
-Numbers
+1. Numbers
    Only integers are supported (no floats or decimals).
    Used for counts, levels, turns, friendliness, etc.
 
    Examples:
       myZone = SafariZone(10, 20);
 
-Strings
+2. Strings
    Enclosed in double quotes " " for names, properties, or messages.
    
    Examples:
       print("Welcome to the Safari Zone!");
       myZone.pokemon->add("Charmander");
 
-Booleans
+3. Booleans
    Pokémon-flavored boolean literals: true or false.
    Used for shiny, caught, fainted, etc.
    
@@ -127,13 +127,13 @@ Booleans
       pikachu.shiny = true;
       pikachu.caught = false;
 
-Null
+4. Null
    Represent the absence of a value.
    
    Example:
       encounter = null;
 
-Arrays
+5. Arrays
    Enclosed in square brackets [ ] and can store multiple Pokémon or values.
 
    Examples:
@@ -168,11 +168,11 @@ Recommended Naming Style:
 
 
 **Syntax Style**
-   1. Whitespace: Not significant, but indentation is recommended for readability.
-   2. Statement termination: Semicolons ; are required at the end of every statement.
+1. Whitespace: Not significant, but indentation is recommended for readability.
+2. Statement termination: Semicolons ; are required at the end of every statement.
       e.g.
       print("You caught Pikachu!");
-   3. Blocks: Use curly braces { } for grouping multiple statements.
+3. Blocks: Use curly braces { } for grouping multiple statements.
       e.g.
       explore(myZone) {
           encounter = myZone.pokemon->random();
@@ -180,14 +180,14 @@ Recommended Naming Style:
           
           tryCatchEncounter(encounter);
       }
-   4. Instance method chaining: Use -> for calling object methods.
+4. Instance method chaining: Use -> for calling object methods.
       e.g.
       encounter = myZone.pokemon->random();
-   5. Use . for class property access.
+5. Use . for class property access.
       e.g.
       myZone = SafariZone(10,10);
       print(myZone.balls);
-   6. Line breaks: Statements can be split across multiple lines for readability, but the semicolon must remain at the end.
+6. Line breaks: Statements can be split across multiple lines for readability, but the semicolon must remain at the end.
 
 **Sample Code**
 [Provide a few examples of valid code in your language to demonstrate the syntax and features]
