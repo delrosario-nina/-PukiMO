@@ -6,94 +6,303 @@ Hernia, Christian Joseph G.
 
 
 **Language Overview**
-PUKIMO is a dynamically typed scripting language inspired by the game Pokemon GO, designed for creating, managing, and interacting with Pokemon and trainers. 
-Main Characteristics
+PUKIMO Safari Zone Edition is a dynamically typed, Pokémon-themed domain-specific language (DSL) designed to simulate a Safari Zone adventure. Players explore the safari zone, encounter wild Pokémon, throw Safari Balls, and manage a temporary Safari team. Unlike the traditional Pokémon experience, this DSL emphasizes exploration, random encounters, and chance-based catching mechanics, creating a narrative, adventure-like experience.
 
-- Close to english language
-- Arrow-based method chaining (->) 
-- Static/class-level access (::) for queries and utilities
-- Focused on catching, managing, and inspecting Pokemon
+Main Characteristics:
+   1. Simple object-oriented style with lightweight syntax.
+   2. Built-in types for SafariZone, Team, and Pokemon.
+   3. Declarative DSL-style commands (explore, throwBall, filter) for expressing game-like behavior.
+   4. Support for attributes like nature, behavior, friendliness, and shiny.
+   5. Human-readable syntax with comments (:>) for clarity and fun.
 
 
 **Keywords**
-Trainer : Defines a trainer object
-catch : Trainer method to catch Pokemon
-release : Trainer method to release Pokemon
-team : Trainer method to view Pokemon team
-Pokemon : Define a Pokemon object
-info : Pokemon method to view Pokemon info
-all : Static/Class method to egt all instances of the object
-find : Static/Class method to find Pokemin or trainers by name
-shiny : Boolean with only true or flase values
-fainted : Boolean with only true or flase values
-while : While loop
-else : else
-flee : ends loop
-trycatch : For loop for Pokemon
+   if: Introduces a conditional block. Executes code if a condition is true.
+   else: Defines the alternative branch of an if statement.
+   explore: Special loop construct for iterating over Safari Zone turns or balls.
+   run: Exits the current loop or exploration early.
+   define: Declares a user-defined function.
+   print: Outputs text or data to the console.
+   throwBall: Attempts to catch a Pokémon inside an encounter.
+   true: Boolean literal representing truth.
+   false: Boolean literal representing falsehood.
+   SafariZone: Built-in type for managing Safari Zone state (balls, turns, Pokémon).
+   Team: Built-in type for managing the player’s caught Pokémon.
+   Pokemon: Built-in type representing individual Pokémon entities.
+
+Built-in Properties & Methods
+These are predefined attributes and functions available on core objects (SafariZone, Team, Pokemon). They are not reserved words, but form part of the standard library.
+
+SafariZone
+Properties:
+   balls → number of Safari Balls available.
+   turns → number of turns left.
+   pokemon → collection of Pokémon in the zone.
+
+Methods:
+   refillBalls(amount) → adds more Safari Balls.
+   refillTurns(amount) → adds more turns.
+
+Team
+Properties:
+   pokemon → collection of Pokémon in the team.
+
+Methods:
+   add(pokemon) → adds a Pokémon to the team.
+   all() → lists all Pokémon in the team.
+   find(name) → finds a Pokémon by name.
+   info(name, only=property) → retrieves detailed info about a Pokémon.
+   has(name) → checks if a Pokémon is in the team.
+   length() → returns number of Pokémon in the team.
+   random() → returns a random Pokémon from the team.
+
+Pokemon
+Properties:
+level → numeric level of the Pokémon.
+shiny → boolean shiny status.
+nature → string nature value.
+behavior → string describing Pokémon behavior.
+friendliness → numeric friendliness value.
+caught → boolean whether caught.
+
+Collection Methods (for both Zone and Team Pokémon)
+add(name) → adds a Pokémon.
+remove(name) → removes a Pokémon.
+all() → returns all Pokémon in the collection.
+find(name) → finds a specific Pokémon.
+random() → returns a random Pokémon.
+filter(criteria) → filters Pokémon based on attributes (e.g., shiny=true, nature="Timid").
 
 
 **Operators**
 Arithmetic Operators
-+ 
--
-/
-*
-%
+   + → addition or string concatenation.
+   - → subtraction.
+   * → multiplication.
+   / → division.
+   % → modulo (remainder).
 
 Comparison Operators
-<
->
-==
-!=
-<=
->=
+   < → less than.
+   > → greater than.
+   == → equal to.
+   != → not equal to.
+   >= → greater than or equal to.
+   <= → less than or equal to.
 
-Logical Operators
-AND 
-OR
-NOT
+Logical Operators 
+   AND → logical conjunction.
+   OR → logical disjunction.
+   NOT → logical negation.
 
 Assignment Operators
-=
+   = → assigns a value to a variable or property.
+
+Access / Chaining Operators
+   -> → calling methods
+   . → access a property of an object
+
 
 **Literals**
-Numbers: Only integers are supported (decimal points are not allowed).
-Example: 42, 100, 1234
-Strings: Enclosed in double quotes " ".
-Example: "Pikachu", "Ash"
-Shiny / Fainted: Boolean values to keep Pokémon flavor.
-shiny → true
-fainted → false
-Null: none represents a null value (like null or nil).
-Array: Enclosed in square brackets [ ].
+Numbers
+   Only integers are supported (no floats or decimals).
+   Used for counts, levels, turns, friendliness, etc.
+
+   Examples:
+      myZone = SafariZone(10, 20);
+
+Strings
+   Enclosed in double quotes " " for names, properties, or messages.
+   
+   Examples:
+      print("Welcome to the Safari Zone!");
+      myZone.pokemon->add("Charmander");
+
+Booleans
+   Pokémon-flavored boolean literals: true or false.
+   Used for shiny, caught, fainted, etc.
+   
+   Examples:
+      pikachu = myTeam.pokemon->find(“pikachu”);
+      pikachu.shiny = true;
+      pikachu.caught = false;
+
+Null
+   Represent the absence of a value.
+   
+   Example:
+      encounter = null;
+
+Arrays
+   Enclosed in square brackets [ ] and can store multiple Pokémon or values.
+
+   Examples:
+      myTeamList = ["Pikachu", "Bulbasaur", "Charmander"];
+
 
 **Identifiers**
-Definition: Names used for variables, functions (move), and objects (Trainer, Pokemon).
 Rules for valid identifiers:
-Must start with a letter (A-Z or a-z) or an underscore (_).
-Can contain letters, digits (0-9), and underscores (_).
-Cannot be a reserved keyword (like catch, pokeball, trycatch, shiny, etc.).
-Case sensitivity: Identifiers are case-sensitive.
-Example: Ash and ash are treated as different identifiers.
+   1. Must start with a letter (A-Z or a-z) or an underscore (_).
+   2. Can contain letters, digits (0-9), and underscores (_).
+   3. Cannot contain spaces or other special characters.
+   4. Cannot be a reserved keyword (e.g.,SafariZone, throwball, run, shiny, etc.).
+   5. Case-sensitive: Ash and ash are treated as different identifiers.
+   
 
+Recommended Naming Style:
+   1. camelCase for variables and functions.
+   2. PascalCase for object-like structures or constants
+
+   Example:
+      pikachuLevel = 15
+      BulbasaurStats = [100, 80, 90]
+      moveName = "Thunderbolt"
 
 **Comments**
-// Comments are written like this
-// Multi-line comments are written like this 
-   Nested comments are not supported //
-
+1. :> - single line comments are written like this
+   :> this is a comment
+2. /* - multi-line comments are written like this 
+   /* this is a multiline
+   comment */
+3. Nested comments are not supported
 
 
 **Syntax Style**
-Whitespace is not significant, but indentation will be used for organization and readability.
-Statements end on a newline, adding a semicolon is optional. 
-Blocks use curly braces ‘{ }’ for grouping
-Instance method chaining will use ‘->’  (e.g., Ash -> catch(Pokemon))
-Static/Class calls will use ‘: :’ (e.g.,Pokemon : : all)
+   1. Whitespace: Not significant, but indentation is recommended for readability.
+   2. Statement termination: Semicolons ; are required at the end of every statement.
+      e.g.
+      print("You caught Pikachu!");
+   3. Blocks: Use curly braces { } for grouping multiple statements.
+      e.g.
+      explore(myZone) {
+          encounter = myZone.pokemon->random();
+          print("A wild " + encounter + " appeared!");
+          
+          tryCatchEncounter(encounter);
+      }
+   4. Instance method chaining: Use -> for calling object methods.
+      e.g.
+      encounter = myZone.pokemon->random();
+   5. Use . for class property access.
+      e.g.
+      myZone = SafariZone(10,10);
+      print(myZone.balls);
+   6. Line breaks: Statements can be split across multiple lines for readability, but the semicolon must remain at the end.
 
 **Sample Code**
 [Provide a few examples of valid code in your language to demonstrate the syntax and features]
+:> Initialize Safari Zone with 10 Safari Balls and 20 turns
+myZone = SafariZone(10, 20);
+myTeam = Team();
 
+:> Welcome messages
+print("Welcome to the Safari Zone!");
+print("You have " + myZone.balls + " Safari Balls.");
+print("You can explore for " + myZone.turns + " turns.");
+
+:> Add Pokémon to the Safari Zone
+myZone.pokemon->add("Squirtle");
+myZone.pokemon->add("Charmander");
+myZone.pokemon->add("Bulbasaur");
+myZone.pokemon->remove("Squirtle");
+
+:> Display Pokémon in the zone
+print("Pokémon roaming the zone:");
+print(myZone.pokemon->all());
+print("Finding Bulbasaur:");
+print(myZone.pokemon->find("Bulbasaur"));
+
+:> helper
+define tryCatchEncounter(pokemon) {
+    throwBall(pokemon) {
+        myTeam->add(pokemon);
+        pokemon.caught = true;
+        print(pokemon + " was caught!");
+    }
+    else {
+        pokemon.caught = false;
+        print(pokemon + " escaped!");
+    }
+
+    :> Reduce Safari Balls automatically
+    myZone.balls = myZone.balls - 1;
+
+    :> Stop exploring if out of balls
+    if myZone.balls == 0 {
+        print("You're out of Safari Balls!");
+        run;
+    }
+}
+
+:> exploration loop structure
+explore(myZone) {
+    encounter = myZone.pokemon->random();
+    print("A wild " + encounter + " appeared!");
+    
+    tryCatchEncounter(encounter);
+}
+
+:> exploration loop with explicit turns
+explore(myZone.turns) {
+    encounter = myZone.pokemon->random();
+    print("A wild " + encounter + " appeared!");
+    
+    tryCatchEncounter(encounter);
+}
+
+:> Team inspection
+print("Team Pokémon info:");
+print(myTeam.pokemon->all());
+
+print("Pikachu info:");
+print(myTeam.pokemon->info("Pikachu"));
+myTeam->has("Pikachu")
+myTeam->length()
+myTeam->random()
+print("Pikachu shiny status:");
+print(myTeam.pokemon->info("Pikachu", only="shiny"));
+
+/* Pokémon properties
+pikachu.level = 5;
+pikachu.shiny = true;
+pikachu.nature = "Timid";
+pikachu.behavior = "Curious";
+pikachu.friendliness = 70;
+pikachu.caught = false;
+*/
+
+:> Safari Zone property manipulation
+myZone->refillBalls(10);
+print("You now have " + myZone.balls + " Safari Balls!");
+
+myZone->refillTurns(5);
+print("You can explore for " + myZone.turns + " more turns!");
+
+:> Filtering
+print("Filtering Timid Pokémon in the zone:");
+print(myZone.pokemon->filter(nature="Timid"));
+
+print("Filtering shiny Pokémon in team:");
+print(myTeam.pokemon->filter(shiny=true));
 
 **Design Rationale**
 [Explain the reasoning behind your design choices]
+1. Single Trainer
+   - The language assumes one implicit Trainer. This removes boilerplate and keeps code simple, like in the games (no need to declare a trainer each time).
+2. Pokémon-flavored literals and booleans
+   - Properties like shiny, nature, behavior, friendliness, and caught are built-in. This keeps the language close to the Pokémon world instead of generic programming terms.
+3. Arrow-based method chaining (->)
+   - Inspired by Laravel Eloquent ORM, looks cleaner to chain when compared to (.).
+4. Static/Class-level access (.)
+   - This cleanly separates global utilities from instance methods, while keeping the syntax consistent with property access.
+5. English-like syntax and keyword
+   - Core actions (e.g., throwBall, release, team, explore, run) are chosen to feel like Pokémon gameplay commands, making the language readable and fun.
+6. Statements use semicolons
+   - All statements end with ;. This makes it easier to track the end of line and to parse.
+7. Minimalist control flow
+   - Minimized to keep design simple and give the safari zone experience
+8. Comments and readability
+   - Fun comment syntax enhances engagement without affecting parsing.
+9. Focus on clarity and accessibility
+   - The syntax is designed to be easy to read for Pokémon fans, while also structured enough to be parsed like a real language.
+
